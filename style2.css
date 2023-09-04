@@ -139,6 +139,7 @@ main{
 .house-img img{
     width: 100%;
     border-radius: 12px;
+    height: 285px;
 }
 .house-info h3{
     font-weight: 600;
@@ -146,17 +147,26 @@ main{
     font-size: 22px;
     margin: 4px 0;
 }
-.house-info i{
+.house-info>i{
     text-align: end;
   padding: 1vw;
   font-size: 2vw;
   color: #ff5361;
+  padding-bottom: 0px;
+}
+.house-offerings{
+  font-size: 25px;
 }
 #house-rating{
     margin-top: 15px;
   display: flex;
   align-items: center;
-
+  font-size: 25px;
+}
+#house-rating>i{
+  padding: 1vw;
+  font-size: 2vw;
+  color: #ff5361;
 }
 .house-price{
     text-align: right;

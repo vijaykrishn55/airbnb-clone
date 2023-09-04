@@ -7,11 +7,12 @@ const search_details=document.getElementById("search-details");
 search_details.innerText=JSON.parse(storedLocation) +"| "+ JSON.parse(storedCheckOut) +"| "+ JSON.parse(storedGuest);
 
 async function getDetails(location, checkin, checkout, guest) {
-  const url = `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${JSON.parse(checkin)}&checkout=${JSON.parse(checkout)}&adults=${guest}&children=0&infants=0&pets=0&page=1&currency=USD`;
+  const url = `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=2023-09-04&checkout=2023-09-05&adults=1&children=0&infants=0&pets=0&page=1&currency=USD`;
   const options = {
     method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "eb6e65e43cmsh225112c58b81b4bp1d6494jsn510d9e153b5d",
+    headers: { 
+      // eb6e65e43cmsh225112c58b81b4bp1d6494jsn510d9e153b5d
+      "X-RapidAPI-Key": "eb2e65e43cmsh225112c58b81b4bp1d6494jsn510d9e153b5d",
       "X-RapidAPI-Host": "airbnb13.p.rapidapi.com",
     },
   };
@@ -22,6 +23,7 @@ async function getDetails(location, checkin, checkout, guest) {
     console.log(result)
     data = result.results;
       console.log(data)
+      // getCards(data);
   } catch (error) {
     console.error(error);
   }
@@ -3224,24 +3226,25 @@ async function getDetails(location, checkin, checkout, guest) {
           }
         }
       ]
-    function getCards(dt){
-        const room_container=document.getElementsByClassName("left-col");
+      console.log(dt)
+      getCards(dt);
+    function getCards(data){
+        const room_container=document.querySelector(".left-col");
         const n=data.length;
         let p=document.createElement("p");
         p.innerText=`${n}+ stays in ${data[0].city}`
-        room_container.append(p);
-        for (let room=0;room<n;room++){
+        room_container.appendChild(p);
+        for (let room=0;room<n/2;room++){
             const house=document.createElement("div");
             house.setAttribute("class","house");
             house.innerHTML=`
             <div class="house-img">
-                        <a href="house.html">${data[room].images[0]}</a>
+                        <a href="house.html"><img src="${data[room].images[0]}" alt=""></a>
                     </div>
                     <div class="house-info">
                         <div class="house-title">
                             <p>${data[room].name}</p>
                             <h3>${data[room].type}</h3>
-                            <button id="room">Cost Breakdown</button>
                         </div>
                         <i class="ri-heart-line"></i>
                         <div class="house-offerings">
@@ -3254,19 +3257,25 @@ async function getDetails(location, checkin, checkout, guest) {
                         </div>
                     </div>
             `;
-            const btn=document.getElementById(`${room}`);
-            btn.addEventListener("click",CostBreak(data));
+            const house_title=house.querySelector(".house-title")
+            const btn=document.createElement("button");
+            btn.innerText='cost breakdown'
+            // const id=String.fromCharCode(i+65)
+           btn.addEventListener("click",()=>{CostBreak(data[room])});
+          house_title.appendChild(btn);
             map_details.push({latitude:data[room].lat,lagtitude:data[room].lng,});
             room_container.appendChild(house);
         }
     }
-    function CostBreak(listing) {
+    
+    function CostBreak(listing,id) {
         // Calculate additional fees and total cost
         const additionalFees = listing.price * 0.10; // Assuming additional fees are 10% of base price
         const totalCost = listing.price + additionalFees;
     
         // Create a modal dialog box
         const modal = document.createElement("div");
+        modal.setAttribute("id",id);
         modal.style.display = "block";
         modal.style.width = "300px";
         modal.style.height = "200px";
@@ -3279,13 +3288,20 @@ async function getDetails(location, checkin, checkout, guest) {
         modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.1)";
     
         // Add booking cost breakdown to the modal
+        let fees=0;
+        
+        for(let i=1;i<listing.price.priceItems.length;i++){
+          if(listing.price.priceItems[i]){
+            fees+=listing.price.priceItems[i].amount;
+          }
+        }
         modal.innerHTML = `
             <h2>Booking Cost Breakdown</h2>
-            <p>Base Rate: $${listing.price.toFixed(2)}</p>
-            <p>Additional Fees: $${additionalFees.toFixed(2)}</p>
-            <p>Total Cost: $${totalCost.toFixed(2)}</p>
+            <p>Base Rate: ${listing.price.priceItems[0].amount}</p>
+            <p>Additional Fees: ${fees}</p>
+            <p>Total Cost: ${listing.price.rate}</p>
         `;
-    
+        
         // Add a close button to the modal
         const closeButton = document.createElement("button");
         closeButton.innerText = "Close";
