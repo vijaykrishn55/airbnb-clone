@@ -53,10 +53,10 @@ nav>ul{
 
 .search-bar{
     background: #fff;
-    width: 55%;
+    width: 60%;
     position: relative;
     top: 3vh;
-    margin: 65px auto 50px;
+    margin: 45px auto 50px;
     padding: 6px 10px 6px 30px;
     border-radius: 50px;
 }

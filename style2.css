@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
 }
+
 /* header  */
 header{
     position: fixed;
@@ -99,9 +100,11 @@ main{
   grid-template-columns: 70vw 30vw;
     
 }
+.left-col::-webkit-scrollbar{
+  display: none !important;
+}
 .left-col{
-    
-    overflow: scroll;
+    overflow: auto;
     height: 100vh;
 }
 .left-col:first-child{
@@ -129,6 +132,12 @@ main{
     flex-basis: 40%;
     height: 285px;
 }
+.house-img>div{
+  text-align: center;
+}
+#distince{
+  background-color: #efefef;
+}
 .house-info{
     flex-basis: 58%;
     display: flex;
@@ -144,7 +153,7 @@ main{
 .house-info h3{
     font-weight: 600;
     color: #333;
-    font-size: 22px;
+    font-size: 27px;
     margin: 4px 0;
 }
 .house-info>i{
@@ -172,6 +181,9 @@ main{
     text-align: right;
     margin-right: 1vw; 
 } 
+.house-title>p{
+  font-size: 22px;
+}
 .house-price h4{
     font-size: 20px;
 }

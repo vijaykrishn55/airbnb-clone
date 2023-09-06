@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
@@ -44,7 +45,7 @@
     <main>
         <div class="list-container">
             <div class="left-col">
-                <p id="total-rooms">200+ Stays in Hospet</p>
+                <!-- <p id="total-rooms">200+ Stays in Hospet</p> -->
                 <!-- <div class="house">
                     <div class="house-img">
                         <a href="house.html"><img src="images/Big Card.png"></a>
@@ -67,9 +68,9 @@
                 </div>  -->
             </div>
             <div class="right-col" id="map">
-                <iframe src="https://maps.google.com/maps?q=${lat}, ${long}&z=15&output=embed"
+                <!-- <iframe src="https://maps.google.com/maps?q=${lat}, ${long}&z=15&output=embed"
                 frameborder="0"
-                id="mapFrame"></iframe>
+                id="mapFrame"></iframe> -->
             </div>
             
         </div>
@@ -127,6 +128,7 @@
         </div>
     </footer>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=de7e35ad70d5d41618048036fe5e6471&callback=initMap" async defer></script> -->
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="searching.js"></script>
 </body>
 
